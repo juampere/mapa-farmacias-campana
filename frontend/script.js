@@ -1,4 +1,4 @@
-// 1. Configuración del mapa
+// 1. Configuración del mapa (Stadia Dark)
 const map = L.map('map').setView([-34.1718, -58.9533], 13);
 
 L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -15,7 +15,7 @@ const iconoFarmacia = L.divIcon({
     iconAnchor: [12, 12]
 });
 
-// 2. Función para cargar las farmacias (CON LINK DE RENDER)
+// 2. Función para cargar las farmacias (CONECTADO A RENDER)
 async function cargarFarmacias(ruta) {
     try {
         capaFarmacias.clearLayers();
@@ -41,7 +41,7 @@ async function cargarFarmacias(ruta) {
                         <b style="font-size: 1.1rem; color: #2ecc71; display: block;">${f.nombre}</b>
                         <p style="margin: 5px 0; font-size: 0.85rem; color: #bbb;">${f.direccion}</p>
                         <div style="margin-top: 10px; border-top: 1px solid #333; padding-top: 10px;">
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" 
+                            <a href="https://www.google.com/maps?q=${lat},${lng}" 
                                target="_blank" 
                                style="display: block; padding: 10px; background: #2ecc71; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">
                                CÓMO LLEGAR
@@ -60,7 +60,7 @@ async function cargarFarmacias(ruta) {
     }
 }
 
-// 3. Botones
+// 3. Botones (Eliminamos el error de recarga múltiple)
 document.getElementById('btn-turno').addEventListener('click', () => cargarFarmacias('farmacias/turno'));
 document.getElementById('btn-todas').addEventListener('click', () => cargarFarmacias('farmacias'));
 

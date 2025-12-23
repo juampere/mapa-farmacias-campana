@@ -21,7 +21,7 @@ def obtener_farmacias(solo_turnos=False):
         conexion.close()
         return resultado
     except Exception as e:
-        print(f"Error en base de datos: {e}")
+        print(f"Error: {e}")
         return []
 
 @app.route('/api/farmacias', methods=['GET'])
