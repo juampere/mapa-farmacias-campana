@@ -1,4 +1,4 @@
-// 1. Configuración del mapa (Stadia Dark que elegimos)
+// 1. Configuración del mapa (Stadia Dark)
 const map = L.map('map').setView([-34.1718, -58.9533], 13);
 
 L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -20,7 +20,8 @@ const iconoFarmacia = L.divIcon({
 async function cargarFarmacias(ruta) {
     try {
         capaFarmacias.clearLayers();
-        const respuesta = await fetch(`http://127.0.0.1:5000/api/${ruta}`);
+        // Usamos tu link de Render que ya funciona
+        const respuesta = await fetch(`https://backend-farmacias-cnha.onrender.com/api/${ruta}`);
         const farmacias = await respuesta.json();
 
         farmacias.forEach(f => {
@@ -28,8 +29,6 @@ async function cargarFarmacias(ruta) {
             const lng = f.longitud;
 
             if (lat && lng) {
-                
-                // Definimos el placeholder (lo que sale si no hay foto)
                 const placeholder = `
                     <div style="width: 100%; height: 110px; border-radius: 8px; background: #222; border: 1px dashed #444; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 10px;">
                         <span style="font-size: 2rem; color: #27ae60; opacity: 0.3;">✚</span>
@@ -37,20 +36,20 @@ async function cargarFarmacias(ruta) {
                     </div>
                 `;
 
-                // Elegimos si mostrar la imagen o el placeholder
                 const imagenHtml = f.imagen_url ? 
                     `<div style="width: 100%; height: 110px; border-radius: 8px; overflow: hidden; margin-bottom: 10px; border: 1px solid #444;">
                         <img src="${f.imagen_url}" style="width: 100%; height: 100%; object-fit: cover;">
                      </div>` : 
                     placeholder;
 
+                // Corregimos el link de Google Maps que estaba roto
                 const contenidoPopup = `
                     <div style="text-align: center; font-family: sans-serif; width: 200px; color: #eee;">
                         ${imagenHtml}
                         <b style="font-size: 1.1rem; color: #2ecc71; display: block;">${f.nombre}</b>
                         <p style="margin: 5px 0; font-size: 0.85rem; color: #bbb;">${f.direccion}</p>
                         <div style="margin-top: 10px; border-top: 1px solid #333; padding-top: 10px;">
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" 
+                            <a href="https://www.google.com/maps?q=${lat},${lng}" 
                                target="_blank" 
                                style="display: block; padding: 10px; background: #2ecc71; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.8rem;">
                                CÓMO LLEGAR
