@@ -14,7 +14,7 @@ jobs:
       - name: Configurar Python
         uses: actions/status-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.12'
 
       - name: Instalar dependencias
         run: pip install requests beautifulsoup4 # Poné acá las que use tu actualizador
