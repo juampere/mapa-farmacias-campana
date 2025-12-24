@@ -20,8 +20,9 @@ jobs:
       - name: Instalar librerias
         run: pip install requests beautifulsoup4
 
-      - name: Ejecutar script
-        run: python backend/actualizar_turnos.py
+      - name: Ejecutar script de actualización
+        working-directory: ./backend
+        run: python actualizar_turnos.py
 
       - name: Guardar cambios
         run: |
