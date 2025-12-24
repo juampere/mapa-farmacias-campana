@@ -44,7 +44,8 @@ async function cargarFarmacias(ruta) {
                     <div style="text-align: center; font-family: sans-serif; width: 200px; color: #eee;">
                         ${imagenHtml}
                         <b style="font-size: 1.1rem; color: #2ecc71; display: block;">${f.nombre}</b>
-                        <p style="margin: 5px 0; font-size: 0.85rem; color: #bbb;">${f.direccion}</p>
+                        <p style="margin: 5px 0 2px 0; font-size: 0.85rem; color: #bbb;">${f.direccion}</p>
+                        <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #888; font-weight: bold;">${f.telefono || ''}</p>
                         <div style="margin-top: 10px; border-top: 1px solid #333; padding-top: 10px;">
                             <a href="https://www.google.com/maps?q=${lat},${lng}" 
                                target="_blank" 
