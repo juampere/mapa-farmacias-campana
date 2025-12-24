@@ -24,12 +24,12 @@ jobs:
         working-directory: ./backend
         run: python actualizar_turnos.py
 
-      - name: Guardar cambios
+      - name: Guardar cambios en GitHub
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add farmacias.db
-          git commit -m "Actualizacion automatica" || exit 0
+          git add backend/farmacias.db || echo "No hay cambios en la DB"
+          git commit -m "Actualización automática de turnos $(date)" || echo "Nada para commitear"
           git push
 
       - name: Avisar a Render
