@@ -1,9 +1,9 @@
 // 1. Configuración del mapa (Stadia Dark)
 const map = L.map('map').setView([-34.1718, -58.9533], 13);
 
-L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-    maxZoom: 20,
-    attribution: '© Stadia Maps'
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
 }).addTo(map);
 
 let capaFarmacias = L.layerGroup().addTo(map);
