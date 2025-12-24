@@ -21,7 +21,7 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Ejecutar script
-        run: python actualizar_turnos.py
+        run: python backend/actualizar_turnos.py
 
       - name: Guardar cambios
         run: |
