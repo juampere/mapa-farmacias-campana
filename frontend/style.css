@@ -1,8 +1,7 @@
-/* Colores tipo farmacia y limpieza visual */
 :root {
     --verde-farmacia: #2ecc71;
     --verde-oscuro: #27ae60;
-    --fondo-oscuro: #1a1a1a; /* Gris casi negro */
+    --fondo-oscuro: #1a1a1a;
     --texto-claro: #e0e0e0;
 }
 
@@ -13,13 +12,13 @@ body, html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--fondo-oscuro);
     color: var(--texto-claro);
+    overflow: hidden;
 }
 
 header {
     padding: 15px;
     text-align: center;
     background: #222;
-    color: #e0e0e0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     z-index: 1000;
     position: relative;
@@ -28,7 +27,7 @@ header {
 h1 {
     margin: 0 0 10px 0;
     font-size: 1.5rem;
-    color: var(--verde-oscuro);
+    color: var(--verde-farmacia);
 }
 
 .botones-contenedor {
@@ -44,37 +43,22 @@ button {
     cursor: pointer;
     font-weight: bold;
     transition: 0.3s;
-    background: #444; /* Botones oscuros */
+    background: #444;
     color: #bbb;
 }
 
+/* Esta clase es la que moveremos con JS */
 button.activo {
-    background-color: var(--verde-farmacia);
-    color: white;
+    background-color: var(--verde-farmacia) !important;
+    color: white !important;
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
 }
 
-/* Esto aplica un filtro al mapa para que no brille tanto */
-.leaflet-tile-container {
-    filter: brightness(0.8) contrast(1.2) grayscale(0.2);
-}
-
-/* Estilo Blueprint: Fondo oscuro, calles claras */
-.leaflet-tile {
-    filter: 
-        invert(100%)           /* Invierte el blanco a negro y las calles oscuras a claras */
-        hue-rotate(180deg)     /* Ajusta la fase para mantener los tonos neutros */
-        brightness(0.9)        /* Que no encandile, pero que las calles brillen */
-        contrast(1.5)          /* Fundamental para que la línea de la calle se separe del fondo */
-        grayscale(1);          /* Elimina colores residuales, dejando todo en blanco y negro */
-}
-
-/* Color del "vacío" detrás del mapa */
 #map {
-    background-color: #121212 !important; 
-    height: calc(100vh - 110px);
+    height: calc(100vh - 115px);
+    background-color: #121212;
 }
 
-/* Personalización del Popup para que combine con el estilo oscuro */
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
     background: #222 !important;
     color: #fff !important;

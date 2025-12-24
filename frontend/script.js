@@ -1,8 +1,7 @@
-// 1. Configuración del mapa (Stadia Dark)
 const map = L.map('map').setView([-34.1718, -58.9533], 13);
 
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    attribution: 'Tiles © Esri',
     maxZoom: 16
 }).addTo(map);
 
@@ -15,7 +14,13 @@ const iconoFarmacia = L.divIcon({
     iconAnchor: [12, 12]
 });
 
-// 2. Función para cargar las farmacias (CONECTADO A RENDER)
+// Función para cambiar el color verde entre botones
+function seleccionarBoton(idActivo) {
+    document.getElementById('btn-turno').classList.remove('activo');
+    document.getElementById('btn-todas').classList.remove('activo');
+    document.getElementById(idActivo).classList.add('activo');
+}
+
 async function cargarFarmacias(ruta) {
     try {
         capaFarmacias.clearLayers();
@@ -60,9 +65,17 @@ async function cargarFarmacias(ruta) {
     }
 }
 
-// 3. Botones (Eliminamos el error de recarga múltiple)
-document.getElementById('btn-turno').addEventListener('click', () => cargarFarmacias('farmacias/turno'));
-document.getElementById('btn-todas').addEventListener('click', () => cargarFarmacias('farmacias'));
+// Eventos de botones
+document.getElementById('btn-turno').addEventListener('click', () => {
+    seleccionarBoton('btn-turno');
+    cargarFarmacias('farmacias/turno');
+});
 
-// Carga inicial
+document.getElementById('btn-todas').addEventListener('click', () => {
+    seleccionarBoton('btn-todas');
+    cargarFarmacias('farmacias');
+});
+
+// Inicio
+seleccionarBoton('btn-turno');
 cargarFarmacias('farmacias/turno');
