@@ -1,9 +1,9 @@
 // 1. Configuración del mapa (Stadia Dark)
 const map = L.map('map').setView([-34.1718, -58.9533], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    maxZoom: 16
 }).addTo(map);
 
 let capaFarmacias = L.layerGroup().addTo(map);
