@@ -1,31 +1,35 @@
 name: Actualizar Turnos Diarios
+
 on:
   schedule:
-    - cron: '0 12 * * *' # Esto corre a las 9:00 AM de Argentina (12:00 UTC)
-  workflow_dispatch: # Esto te permite darle a un botón y actualizar cuando quieras
+    - cron: '0 12 * * *'  # 09:00 AM Argentina
+  workflow_dispatch:      # Botón manual
 
 jobs:
   actualizar:
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar código
+      - name: Descargar codigo
         uses: actions/checkout@v3
 
       - name: Configurar Python
-        uses: actions/status-python@v4
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.9'
 
-      - name: Instalar dependencias
-        run: pip install requests beautifulsoup4 # Poné acá las que use tu actualizador
+      - name: Instalar librerias
+        run: pip install requests beautifulsoup4
 
-      - name: Ejecutar actualizador
+      - name: Ejecutar script
         run: python actualizar_turnos.py
 
-      - name: Guardar cambios en la base de datos
+      - name: Guardar cambios
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add farmacias.db
-          git commit -m "Turnos actualizados automáticamente"
+          git commit -m "Actualizacion automatica" || exit 0
           git push
+
+      - name: Avisar a Render
+        run: curl -X POST "TU_LINK_DE_RENDER_AQUÍ"
